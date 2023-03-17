@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 4
+
+//Criação da pilha
+typedef struct{
+     int container[MAX]; // isso define o que vai dentro do vetor container
+     int topo;
+}pilha;
+
+
+//Verificar se esta vazia
+int estaVazia (pilha p)
+{
+    return (p.topo==-1); //RETORNA 1 SE FOR VERDADE E 0 SE FOR FALSO
+}
+
+//Verificar se esta cheia
+int estaCheia (pilha p)
+{
+    return (p.topo==MAX-1);  //MAX-1 porque o vetor começa em zero
+}
+
+//Adicionar containers
+void push(float valor, pilha*p)
+{
+    if (estaCheia(*p))
+        printf("\n\n Erro - pilha cheia");
+    else
+        p->topo++;
+        p->container[p->topo] = valor;
+}
+
+//Retirar valor
+int pop (pilha *p)
+{
+
+    float valor = 0;
+    if (estaVazia (*p))
+        printf ("\n\n Erro - pilha vazia");
+    else
+    {
+        valor = p->container[p->topo];
+        p->topo--;
+        printf ("\nO elemento removido é: %.2f",valor);
+    }
+    return valor;
+
+}
+
+//Mostrar pílha
+void mostra (pilha p)
+{
+for (int i=(p.topo);i>=0;i--)
+    {
+    printf ("\n%d",p.container[i]);
+    }
+}
+
+int main()
+{
+    pilha p1, p2;
+    p1.topo = -1;
+    p2.topo = -1;
+    int escolha, cod, exc;
+
+    printf("Digite 1 para empilar, 2 para desempilhar, 3 para mostrar a pilha 1, 4 para mostrar a pilha 2 e 0 para sair: ");
+    scanf("%d", &escolha);
+    while (escolha!=0){
+        if (escolha==1)
+        {
+            if((!estaCheia(p1)) || (!estaCheia(p2)))
+            {
+                printf("Digite o codigo do container: ");
+                scanf("%d", &cod);
+
+                if((p1.topo<p2.topo)||(p1.topo==p2.topo))
+                    push(cod,&p1);
+                else
+                    push(cod,&p2);
+            }
+            else
+                printf("Não é mais possivel empilhar");
+        }
+        if (escolha==2)
+        {
+            if((!estaVazia(p1)) || (!estaVazia(p2)))
+            {
+                printf("Digite o codigo do container que que desempilhar:  ");
+                scanf("%d", &cod);
+                if((p1.container[p1.topo]==cod))
+                    exc = pop(&p1);
+                if((p2.container[p2.topo]==cod))
+                    exc = pop(&p2);
+            }
+            else
+                printf("Não ha containers para desempilhar");
+        }
+        if (escolha==3)
+            mostra(p1);
+        if (escolha==4)
+            mostra(p2);
+
+        printf("\nDigite 1 para empilar, 2 para desempilhar, 3 para mostrar a pilha 1, 4 para mostrar a pilha 2 e 0 para sair: ");
+        scanf("%d", &escolha);
+    }
+
+    return 0;
+}
+
+
+    /*
+    for(i=0;i<MAX;i++)
+    {
+        printf("Digite um valor: ");
+        scanf("%d", &p1.container[i]);
+    }
+
+    mostra(p1);
+
+   // push(1,&p1);
+    //push(2,&p1);
+    //push(3,&p1);
+    //push(4,&p1);
+    //mostra(p1);
+*/
+
+

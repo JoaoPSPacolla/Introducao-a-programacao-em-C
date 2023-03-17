@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 10
+
+typedef struct fila
+{
+    float item[MAX];
+    int fim;
+} FILA;
+
+//Verificação se está cheia ou vazio
+int estaCheia (FILA fila)
+{
+    return (fila.fim==(MAX-1));
+}
+
+int estaVazia (FILA fila)
+{
+    return (fila.fim==-1);
+}
+
+//Enfileirar
+void enfileira (float valor, FILA *fila)
+{
+if(estaCheia(*fila))
+{
+    printf ("\n\nErro. Fila cheia\n");
+}
+
+else
+{
+    fila->fim++;
+    fila->item[fila->fim] = valor;
+}
+
+}
+
+//Desinfileirar
+float desenfileira (FILA *fila)
+{
+    float valor = 0;
+    if (estaVazia(*fila))
+    {
+        printf ("\n\nErro. Fila vazia\n");
+    }
+    else
+    {
+        valor = fila->item[0];
+        //passo a frente
+        for (int i=0;i<=fila->fim; i++)
+    {
+        fila->item[i] = fila->item[i+1];
+    }
+    //precisa andar com o marcador também
+    fila->fim--;
+    }
+    return valor;
+}
+
+//Mostrar fila
+void mostra (FILA fila)
+{
+    if (estaVazia(fila))
+    {
+        printf ("\n\nFila vazia - Nada para mostrar\n");
+    }
+    else
+    {
+        for (int i=0; i<=fila.fim; i++)
+    {
+        printf ("%.1f ", fila.item[i]);
+    }
+    }
+}
+
+int registro(){
+    int RA;
+    printf("Digite seu RA para entrar na fila: ");
+    scanf("%d", &RA);
+    return(RA);
+}
+
+int main()
+{
+    int num, op;
+    printf("============MENU============\n[1]Incluir novo aluno na fila\n[2]Atender proximo aluno\n[0]Sair\n");
+    scanf("%d", &op);
+    while (op!=0)
+    {
+        printf("============MENU============\n[1]Incluir novo aluno na fila\n[2]Atender proximo aluno\n[0]Sair");
+        printf("\nDigite o numero: ");
+        scanf("%d", &num);
+    }
+    /*
+    int aluno=registro();
+    printf(registro);*/
+}
